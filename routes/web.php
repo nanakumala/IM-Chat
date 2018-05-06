@@ -11,12 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
 Route::get('/', 'ChatsController@index');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
+Route::get('user', 'UserController@index');
+
+Route::get('get-messages/{friend}', 'ChatsController@userMessages');
+Route::get('messages/{friend}', 'InboxController@userMessages');
