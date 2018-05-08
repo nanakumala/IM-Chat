@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+// use Auth;
 class UserController extends Controller
 {
     public function __construct(){
@@ -18,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users=User::where('id','!=',Auth::user()->id)->get();
-        return view('contact',compact('users'));
+        return $users;
     }
 
     /**

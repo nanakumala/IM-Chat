@@ -18,9 +18,15 @@
 Auth::routes();
 
 Route::get('/', 'ChatsController@index');
-Route::get('messages', 'ChatsController@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
-Route::get('user', 'UserController@index');
+Route::get('/{vue_capture?}', function () {
+    return view('chat');
+})->where('vue_capture','[\/\w\.-]*');
+// Route::get('messages', 'ChatsController@fetchMessages');
+// Route::post('messages', 'ChatsController@sendMessage');
 
-Route::get('get-messages/{friend}', 'ChatsController@userMessages');
-Route::get('messages/{friend}', 'InboxController@userMessages');
+// Route::get('get-messages/{friend}', 'ChatsController@userMessages');
+// Route::get('messages/{friend}', 'InboxController@userMessages');
+Route::prefix('api')->group(function () {
+    Route::get('user', 'UserController@index');
+
+});
