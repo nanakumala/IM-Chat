@@ -8,7 +8,7 @@ class Inbox extends Model
 {
     protected $table='inbox';
     public function sender()
-	{
-	  return $this->belongsTo('App\User','sender');
-	}
+		{
+			return $this->belongsTo('App\User','sender');
+		}
 }

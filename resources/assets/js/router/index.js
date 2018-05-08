@@ -7,15 +7,14 @@ import Chat from '../components/Chat'
 import Contact from '../components/Contact'
 
 const router= new Router({
-    mode: 'history',
     routes: [
         {
-            path: '/chat',
+            path: '/chat/:id',
             name: 'Chat',
             component: Chat
         },
         {
-            path: '/contact',
+            path: '/',
             name: 'Contact',
             component: Contact
         }

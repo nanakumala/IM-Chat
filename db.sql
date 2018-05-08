@@ -1,8 +1,8 @@
 /*
-SQLyog Ultimate v12.4.1 (64 bit)
-MySQL - 10.1.30-MariaDB : Database - laravel-chat
+SQLyog Ultimate v11.33 (64 bit)
+MySQL - 10.1.24-MariaDB : Database - laravel-chat
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,36 +12,44 @@ MySQL - 10.1.30-MariaDB : Database - laravel-chat
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`laravel-chat` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `laravel-chat`;
+
 /*Table structure for table `chatroom` */
 
 DROP TABLE IF EXISTS `chatroom`;
 
 CREATE TABLE `chatroom` (
-  `id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user1` int(11) DEFAULT NULL,
   `user2` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `chatroom` */
+
+insert  into `chatroom`(`id`,`user1`,`user2`,`created_at`,`updated_at`) values (1,4,1,'2018-05-08 15:01:23','2018-05-08 15:01:23'),(2,4,2,'2018-05-08 15:03:21','2018-05-08 15:03:21'),(3,4,3,'2018-05-08 15:03:24','2018-05-08 15:03:24'),(4,1,3,'2018-05-08 16:34:52','2018-05-08 16:34:52'),(5,1,2,'2018-05-08 16:34:54','2018-05-08 16:34:54');
 
 /*Table structure for table `det_chatroom` */
 
 DROP TABLE IF EXISTS `det_chatroom`;
 
 CREATE TABLE `det_chatroom` (
-  `id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_chatroom` int(11) DEFAULT NULL,
   `message` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `id_user` int(11) DEFAULT NULL,
+  `user_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 /*Data for the table `det_chatroom` */
+
+insert  into `det_chatroom`(`id`,`id_chatroom`,`message`,`created_at`,`updated_at`,`user_id`) values (5,1,'heyy','2018-05-08 15:15:57','2018-05-08 15:15:57',4),(12,1,'oi','2018-05-08 15:31:25','2018-05-08 15:31:25',4),(13,1,'oi','2018-05-08 15:31:53','2018-05-08 15:31:53',4),(14,1,'oi','2018-05-08 15:38:11','2018-05-08 15:38:11',1),(15,1,'kampret','2018-05-08 15:38:32','2018-05-08 15:38:32',1),(16,1,'kenapa coy ?','2018-05-08 15:38:38','2018-05-08 15:38:38',4),(17,1,'gpp kok coy','2018-05-08 15:38:47','2018-05-08 15:38:47',1),(18,1,'kenapa ?','2018-05-08 15:42:03','2018-05-08 15:42:03',4),(19,1,'gpp kok','2018-05-08 15:42:15','2018-05-08 15:42:15',1),(20,1,'wee buduh','2018-05-08 15:43:08','2018-05-08 15:43:08',4),(21,1,'oiii','2018-05-08 15:45:21','2018-05-08 15:45:21',4),(22,1,'oii','2018-05-08 15:46:19','2018-05-08 15:46:19',4),(23,1,'wkwk','2018-05-08 15:47:02','2018-05-08 15:47:02',4),(24,1,'wkwk','2018-05-08 15:48:17','2018-05-08 15:48:17',4),(25,NULL,'wkwk','2018-05-08 16:11:31','2018-05-08 16:11:31',4),(26,NULL,'hy na','2018-05-08 16:29:15','2018-05-08 16:29:15',4),(27,NULL,'oit','2018-05-08 16:29:30','2018-05-08 16:29:30',1),(28,NULL,'oi','2018-05-08 16:29:59','2018-05-08 16:29:59',4),(29,NULL,'kampret','2018-05-08 16:30:17','2018-05-08 16:30:17',1),(30,1,'oi','2018-05-08 16:32:14','2018-05-08 16:32:14',4),(31,1,'kampret','2018-05-08 16:32:21','2018-05-08 16:32:21',1),(32,1,'oi','2018-05-08 16:33:15','2018-05-08 16:33:15',1),(33,1,'kenapa gan ?','2018-05-08 16:33:24','2018-05-08 16:33:24',1),(34,1,'kenapa ?','2018-05-08 16:33:59','2018-05-08 16:33:59',1),(35,1,'ape teh nani ?','2018-05-08 16:34:05','2018-05-08 16:34:05',4);
 
 /*Table structure for table `inbox` */
 
@@ -51,58 +59,17 @@ CREATE TABLE `inbox` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sender` int(10) unsigned DEFAULT NULL,
   `receiver` int(10) unsigned DEFAULT NULL,
-  `message` text,
+  `id_chatroom` int(11) DEFAULT NULL,
+  `messages` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `flag` enum('inbox') DEFAULT 'inbox',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 /*Data for the table `inbox` */
 
-insert  into `inbox`(`id`,`sender`,`receiver`,`message`,`created_at`,`updated_at`) values 
-(1,2,3,'hy rip','2018-05-07 01:24:06','0000-00-00 00:00:00'),
-(2,3,2,'jg','2018-05-07 01:38:50','0000-00-00 00:00:00'),
-(3,2,3,'saklek amat','2018-05-07 01:40:27','0000-00-00 00:00:00');
-
-/*Table structure for table `messages` */
-
-DROP TABLE IF EXISTS `messages`;
-
-CREATE TABLE `messages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `messages` */
-
-insert  into `messages`(`id`,`user_id`,`message`,`created_at`,`updated_at`) values 
-(1,1,'pooii','2018-04-29 15:32:47','2018-04-29 15:32:47'),
-(2,1,'wqeqwe','2018-04-29 15:34:02','2018-04-29 15:34:02'),
-(3,1,'oii','2018-04-29 15:47:12','2018-04-29 15:47:12'),
-(4,1,'oii','2018-04-29 15:49:01','2018-04-29 15:49:01'),
-(5,1,'oii','2018-04-29 15:52:47','2018-04-29 15:52:47'),
-(6,1,'oii','2018-04-29 15:55:08','2018-04-29 15:55:08'),
-(7,1,'oiii','2018-04-29 16:01:20','2018-04-29 16:01:20'),
-(8,1,'oi','2018-04-29 16:02:18','2018-04-29 16:02:18'),
-(9,1,'oii','2018-04-29 16:02:48','2018-04-29 16:02:48'),
-(10,1,'wqeqwe','2018-04-29 16:05:55','2018-04-29 16:05:55'),
-(11,1,'oi','2018-05-03 14:04:26','2018-05-03 14:04:26'),
-(12,1,'yaa','2018-05-03 14:04:36','2018-05-03 14:04:36'),
-(13,1,'iuu','2018-05-03 14:04:46','2018-05-03 14:04:46'),
-(14,1,'oiii','2018-05-03 14:05:15','2018-05-03 14:05:15'),
-(15,1,'asd','2018-05-03 15:07:58','2018-05-03 15:07:58'),
-(16,1,'koko','2018-05-03 15:08:13','2018-05-03 15:08:13'),
-(17,1,'s','2018-05-03 15:11:08','2018-05-03 15:11:08'),
-(18,1,'oii','2018-05-03 15:13:57','2018-05-03 15:13:57'),
-(19,2,'sip','2018-05-03 15:22:47','2018-05-03 15:22:47'),
-(20,1,'scf','2018-05-03 15:22:57','2018-05-03 15:22:57'),
-(21,3,'wkwkwk','2018-05-06 16:37:20','2018-05-06 16:37:20'),
-(22,3,'hallo','2018-05-06 16:40:44','2018-05-06 16:40:44'),
-(23,1,'tes','2018-05-06 16:40:52','2018-05-06 16:40:52');
+insert  into `inbox`(`id`,`sender`,`receiver`,`id_chatroom`,`messages`,`created_at`,`updated_at`,`flag`) values (37,4,1,1,'hey','2018-05-08 18:32:58','2018-05-08 18:32:58','inbox'),(38,4,1,1,'wkwkwk','2018-05-08 18:34:37','2018-05-08 18:34:37','inbox'),(40,4,1,1,'oi','2018-05-08 18:42:45','2018-05-08 18:42:45','inbox'),(42,4,1,1,'kampret','2018-05-08 18:47:14','2018-05-08 18:47:14','inbox'),(44,4,1,1,'wkkw','2018-05-08 18:48:42','2018-05-08 18:48:42','inbox');
 
 /*Table structure for table `migrations` */
 
@@ -117,10 +84,7 @@ CREATE TABLE `migrations` (
 
 /*Data for the table `migrations` */
 
-insert  into `migrations`(`id`,`migration`,`batch`) values 
-(1,'2014_10_12_000000_create_users_table',1),
-(2,'2014_10_12_100000_create_password_resets_table',1),
-(3,'2018_04_29_121906_create_messages_table',2);
+insert  into `migrations`(`id`,`migration`,`batch`) values (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_04_29_121906_create_messages_table',2);
 
 /*Table structure for table `outbox` */
 
@@ -130,18 +94,17 @@ CREATE TABLE `outbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sender` int(10) unsigned DEFAULT NULL,
   `receiver` int(10) unsigned DEFAULT NULL,
+  `id_chatroom` int(11) DEFAULT NULL,
   `messages` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `flag` enum('outbox') DEFAULT 'outbox',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 /*Data for the table `outbox` */
 
-insert  into `outbox`(`id`,`sender`,`receiver`,`messages`,`created_at`,`updated_at`) values 
-(1,2,3,'hy rip','2018-05-07 01:38:10','0000-00-00 00:00:00'),
-(2,3,2,'jg','2018-05-07 01:38:32','0000-00-00 00:00:00'),
-(3,2,3,'saklek amat','2018-05-07 01:40:41','0000-00-00 00:00:00');
+insert  into `outbox`(`id`,`sender`,`receiver`,`id_chatroom`,`messages`,`created_at`,`updated_at`,`flag`) values (23,4,1,1,'hey','2018-05-08 18:32:58','2018-05-08 18:32:58','outbox'),(24,4,1,1,'wkwkwk','2018-05-08 18:34:37','2018-05-08 18:34:37','outbox'),(25,1,4,1,'oi','2018-05-08 18:41:35','2018-05-08 18:41:35','outbox'),(26,4,1,1,'oi','2018-05-08 18:42:45','2018-05-08 18:42:45','outbox'),(27,1,4,1,'oi','2018-05-08 18:43:00','2018-05-08 18:43:00','outbox'),(28,4,1,1,'kampret','2018-05-08 18:47:14','2018-05-08 18:47:14','outbox'),(29,1,4,1,'kampret','2018-05-08 18:47:26','2018-05-08 18:47:26','outbox'),(30,4,1,1,'wkkw','2018-05-08 18:48:42','2018-05-08 18:48:42','outbox'),(31,1,4,1,'hey yo','2018-05-08 18:48:52','2018-05-08 18:48:52','outbox'),(32,1,4,1,'hey yoo fuck','2018-05-08 18:49:00','2018-05-08 18:49:00','outbox');
 
 /*Table structure for table `password_resets` */
 
@@ -170,14 +133,11 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`) values 
-(1,'Nana','kumalanana@gmail.com','$2y$10$5rk4AwMJEYjvKRToY6MRjOb4Q4PWuFEtS606YaQ2Eu/xh/wzzdY42',NULL,'2018-04-29 14:56:39','2018-04-29 14:56:39'),
-(2,'kumala','kasaku0408@gmail.com','$2y$10$wNx3ai1xtjbiUjtCYKfNY.KCRYAWEGxg6t.4GwTwEoYDGWK7JyqkW',NULL,'2018-05-03 15:10:53','2018-05-03 15:10:53'),
-(3,'Urip Yogantara','uripyogantara@gmail.com','$2y$10$kOW2knsSmrzNr45JKPxEaep/HLxherAy0/G7sWk8p87Gh6J0LVWI.','9N6b6yAr8LDGQEYVR1SHepaSpE3GQaVl0O0oJhCwWUTozJYJGOqurlGFgpid','2018-05-06 16:33:00','2018-05-06 16:33:00');
+insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`) values (1,'Nana','kumalanana@gmail.com','$2y$10$5rk4AwMJEYjvKRToY6MRjOb4Q4PWuFEtS606YaQ2Eu/xh/wzzdY42',NULL,'2018-04-29 14:56:39','2018-04-29 14:56:39'),(2,'kumala','kasaku0408@gmail.com','$2y$10$wNx3ai1xtjbiUjtCYKfNY.KCRYAWEGxg6t.4GwTwEoYDGWK7JyqkW',NULL,'2018-05-03 15:10:53','2018-05-03 15:10:53'),(3,'Urip Yogantara','uripyogantara@gmail.com','$2y$10$kOW2knsSmrzNr45JKPxEaep/HLxherAy0/G7sWk8p87Gh6J0LVWI.','9N6b6yAr8LDGQEYVR1SHepaSpE3GQaVl0O0oJhCwWUTozJYJGOqurlGFgpid','2018-05-06 16:33:00','2018-05-06 16:33:00'),(4,'I PUTU WAHYU','ikgdarmaputra@gmail.com','$2y$10$BH4uxedme90k.FnSiZAShOetB2U2aEIBBa8h1G26NYdBWW7YIeWwO',NULL,'2018-05-08 14:31:51','2018-05-08 14:31:51');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

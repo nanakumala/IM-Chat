@@ -24,7 +24,8 @@
             sendMessage() {
                 this.$emit('messagesent', {
                     user: this.user,
-                    message: this.newMessage
+                    message: this.newMessage,
+                    chat_id: this.$route.params.id
                 });
 
                 this.newMessage = ''

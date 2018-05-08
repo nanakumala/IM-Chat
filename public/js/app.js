@@ -377,33 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -507,6 +480,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -12031,14 +12031,14 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(41).setImmediate))
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
@@ -29244,7 +29244,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
 
 /***/ }),
 /* 15 */
@@ -47893,9 +47893,9 @@ module.exports = Echo;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(68)
 /* template */
 var __vue_template__ = __webpack_require__(40)
 /* template functional */
@@ -48023,7 +48023,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 42 */
@@ -48216,7 +48216,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(5)))
 
 /***/ }),
 /* 43 */
@@ -48228,7 +48228,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Chat__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Chat___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Chat__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Contact__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Contact__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Contact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Contact__);
 
 
@@ -48239,13 +48239,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-    mode: 'history',
     routes: [{
-        path: '/chat',
+        path: '/chat/:id',
         name: 'Chat',
         component: __WEBPACK_IMPORTED_MODULE_2__components_Chat___default.a
     }, {
-        path: '/contact',
+        path: '/',
         name: 'Contact',
         component: __WEBPACK_IMPORTED_MODULE_3__components_Contact___default.a
     }]
@@ -50888,7 +50887,7 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(46)
 /* template */
@@ -50936,10 +50935,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChatForm_vue__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChatForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChatForm_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ChatMessages_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ChatMessages_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ChatMessages_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue__);
 //
 //
 //
@@ -50955,49 +50952,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        'chat-form': __WEBPACK_IMPORTED_MODULE_0__ChatForm_vue___default.a,
-        'chat-messages': __WEBPACK_IMPORTED_MODULE_1__ChatMessages_vue___default.a
+        'chat-messages': __WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue___default.a
     },
     data: function data() {
         return {
-            messages: [{
-                message: 'hy nana',
-                user: {
-                    name: 'Urip'
-                }
-            }],
+            newMessage: '',
+            messages: [],
             user: {}
         };
     },
     created: function created() {
-        // this.fetchMessages();
-        // Echo.private('chat')
-        // .listen('MessageSent', (e) => {
-        //     this.messages.push({
-        //     message: e.message.message,
-        //     user: e.user
-        //     });
-        // });
+        var _this = this;
+
+        this.fetchMessages();
+        Echo.private('chat').listen('MessageSent', function (e) {
+            console.log(e);
+            _this.messages.push({
+                messages: e.message.messages,
+                name: e.user.name,
+                senderName: e.userReceiver.name,
+                flag: e.message.flag
+            });
+        });
     },
 
 
     methods: {
         fetchMessages: function fetchMessages() {
-            var _this = this;
+            var _this2 = this;
 
-            axios.get('/messages').then(function (response) {
-                _this.messages = response.data;
+            // console.log(this.messages)
+            var chat_id = {
+                sender: localStorage.getItem(this.$route.params.id),
+                chat_id: this.$route.params.id
+            };
+            axios.post('/api/getMessages', chat_id).then(function (response) {
+                // console.log(response.data.name)
+                _this2.messages = response.data;
             });
         },
-        addMessage: function addMessage(message) {
-            this.messages.push(message);
+        addMessage: function addMessage() {
+            var _this3 = this;
 
-            axios.post('/messages', message).then(function (response) {
+            var message = {
+                messages: this.newMessage,
+                chat_id: this.$route.params.id,
+                user2: localStorage.getItem(this.$route.params.id),
+                name: localStorage.getItem('user_name'),
+                senderName: localStorage.getItem('user_name')
+            };
+            this.messages.push(message);
+            axios.post('/api/messages', message).then(function (response) {
+                _this3.newMessage = '';
                 console.log(response.data);
             });
         }
@@ -51005,167 +51020,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(48)
-/* template */
-var __vue_template__ = __webpack_require__(49)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\ChatForm.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4a3050b3", Component.options)
-  } else {
-    hotAPI.reload("data-v-4a3050b3", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
-
-    data: function data() {
-        return {
-            newMessage: ''
-        };
-    },
-
-
-    methods: {
-        sendMessage: function sendMessage() {
-            this.$emit('messagesent', {
-                user: this.user,
-                message: this.newMessage
-            });
-
-            this.newMessage = '';
-        }
-    }
-});
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "input-group" }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.newMessage,
-          expression: "newMessage"
-        }
-      ],
-      staticClass: "form-control input-sm",
-      attrs: {
-        id: "btn-input",
-        type: "text",
-        name: "message",
-        placeholder: "Type your message here..."
-      },
-      domProps: { value: _vm.newMessage },
-      on: {
-        keyup: function($event) {
-          if (
-            !("button" in $event) &&
-            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-          ) {
-            return null
-          }
-          return _vm.sendMessage($event)
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.newMessage = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("span", { staticClass: "input-group-btn" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-sm",
-          attrs: { id: "btn-chat" },
-          on: { click: _vm.sendMessage }
-        },
-        [_vm._v("\n            Send\n        ")]
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4a3050b3", module.exports)
-  }
-}
-
-/***/ }),
+/* 47 */,
+/* 48 */,
+/* 49 */,
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(51)
 /* template */
@@ -51230,6 +51092,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['messages']
@@ -51250,18 +51115,26 @@ var render = function() {
       return _c("li", { key: key, staticClass: "left clearfix" }, [
         _c("div", { staticClass: "chat-body clearfix" }, [
           _c("div", { staticClass: "header" }, [
-            _c("strong", { staticClass: "primary-font" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(message.user.name) +
-                  "\n                "
-              )
-            ])
+            message.flag == "inbox"
+              ? _c("strong", { staticClass: "primary-font" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(message.name) +
+                      "\n                "
+                  )
+                ])
+              : _c("strong", { staticClass: "primary-font" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(message.senderName) +
+                      "\n                "
+                  )
+                ])
           ]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                " + _vm._s(message.message) + "\n            "
+              "\n                " + _vm._s(message.messages) + "\n            "
             )
           ])
         ])
@@ -51297,17 +51170,57 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "panel-footer" },
-      [
-        _c("chat-form", {
-          attrs: { user: _vm.user },
-          on: { messagesent: _vm.addMessage }
-        })
-      ],
-      1
-    )
+    _c("div", { staticClass: "panel-footer" }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.newMessage,
+              expression: "newMessage"
+            }
+          ],
+          staticClass: "form-control input-sm",
+          attrs: {
+            id: "btn-input",
+            type: "text",
+            name: "message",
+            placeholder: "Type your message here..."
+          },
+          domProps: { value: _vm.newMessage },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.addMessage($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.newMessage = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-sm",
+              attrs: { id: "btn-chat" },
+              on: { click: _vm.addMessage }
+            },
+            [_vm._v("\n                          Send\n                      ")]
+          )
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -51322,30 +51235,14 @@ if (false) {
 
 /***/ }),
 /* 54 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(55)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(56)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51384,11 +51281,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 66 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router__ = __webpack_require__(43);
 //
 //
 //
@@ -51402,6 +51300,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -51428,12 +51327,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.contacts = response.data;
                 console.log(response.data);
             });
+        },
+        createChat: function createChat(user) {
+            var data = {
+                user2: user.id
+            };
+            axios.post('/api/createChat', data).then(function (response) {
+                localStorage.setItem(response.data, user.id);
+                __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].push('/chat/' + response.data);
+            });
         }
     }
 });
 
 /***/ }),
-/* 67 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51448,7 +51356,19 @@ var render = function() {
         "table",
         { staticClass: "table" },
         _vm._l(_vm.contacts, function(user, key) {
-          return _c("tr", { key: key }, [_c("td", [_vm._v(_vm._s(user.name))])])
+          return _c("tr", { key: key }, [
+            _c(
+              "td",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.createChat(user)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(user.name))]
+            )
+          ])
         })
       )
     ])
@@ -51463,6 +51383,55 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1ac7daf9", module.exports)
   }
 }
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    created: function created() {
+        this.getUserLogin();
+    },
+
+
+    methods: {
+        getUserLogin: function getUserLogin() {
+            axios.get('/api/getUser').then(function (response) {
+                localStorage.setItem('user_id', response.data.id);
+                localStorage.setItem('user_name', response.data.name);
+                console.log(response.data);
+                // this.messages = response.data;
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

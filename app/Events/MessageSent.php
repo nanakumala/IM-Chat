@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Events;
-use App\User;
-use App\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -20,6 +18,8 @@ class MessageSent implements ShouldBroadcast
      *
      * @var User
      */
+    public $userReceiver;
+
     public $user;
 
     /**
@@ -34,10 +34,11 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, Message $message)
+    public function __construct($user,$userReceiver, $message)
     {
         $this->user = $user;
         $this->message = $message;
+        $this->userReceiver = $userReceiver;
     }
 
     /**
