@@ -6,6 +6,9 @@
             <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
                 Send
             </button>
+            <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
+                Delete
+            </button>
         </span>
     </div>
 </template>
