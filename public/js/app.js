@@ -12046,12 +12046,33 @@ module.exports = Vue;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Contact__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Contact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Contact__);
 
+<<<<<<< HEAD
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+=======
+>>>>>>> 8cb33a1bdc9d25e67225df6ae8d0d2521ad72b38
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 
 
+
+var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+    routes: [{
+        path: '/chat/:id',
+        name: 'Chat',
+        component: __WEBPACK_IMPORTED_MODULE_2__components_Chat___default.a
+    }, {
+        path: '/',
+        name: 'Contact',
+        component: __WEBPACK_IMPORTED_MODULE_3__components_Contact___default.a
+    }]
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     routes: [{
@@ -12119,9 +12140,15 @@ window._ = __webpack_require__(15);
  */
 
 try {
+<<<<<<< HEAD
     window.$ = window.jQuery = __webpack_require__(17);
 
     __webpack_require__(18);
+=======
+  window.$ = window.jQuery = __webpack_require__(17);
+
+  __webpack_require__(18);
+>>>>>>> 8cb33a1bdc9d25e67225df6ae8d0d2521ad72b38
 } catch (e) {}
 
 /**
@@ -12143,9 +12170,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -12161,10 +12188,10 @@ window.Pusher = __webpack_require__(38);
 
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
-    broadcaster: 'pusher',
-    key: '1425efd1648e7e83b040',
-    cluster: 'ap1',
-    encrypted: true
+  broadcaster: 'pusher',
+  key: '1425efd1648e7e83b040',
+  cluster: 'ap1',
+  encrypted: true
 });
 
 /***/ }),
@@ -50970,6 +50997,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ChatMessages_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(11);
 //
 //
 //
@@ -50990,6 +51018,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -51047,6 +51081,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/messages', message).then(function (response) {
                 _this3.newMessage = '';
                 console.log(response.data);
+            });
+        },
+        clearMessage: function clearMessage() {
+            var chat_id = {
+                chatid: this.$route.params.id
+            };
+            axios.post('/api/endchat', chat_id).then(function (response) {
+                console.log(response);
+                __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */].push('/');
             });
         }
     }
@@ -51248,7 +51291,30 @@ var render = function() {
             },
             [_vm._v("\n                          Send\n                      ")]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "input-group-btn",
+            staticStyle: { "padding-left": "5px" }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-sm",
+                attrs: { id: "btn-chat" },
+                on: { click: _vm.clearMessage }
+              },
+              [
+                _vm._v(
+                  "\n                          Delete\n                      "
+                )
+              ]
+            )
+          ]
+        )
       ])
     ])
   ])
