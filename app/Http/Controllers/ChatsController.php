@@ -17,7 +17,7 @@ class ChatsController extends Controller
 {
     public function __construct()
 	{
-	  $this->middleware('auth');
+	  $this->middleware('auth')->except('sendMessageBot');
 	}
 
 	public function index()
@@ -60,7 +60,7 @@ class ChatsController extends Controller
 
 	public function sendMessage(Request $request)
 	{
-	  $user = Auth::user();
+	  	$user = Auth::user();
 		$userReceiver=User::find($request->user2);
 		$messageIn = new Inbox();
 		$messageIn->sender = Auth::user()->id;
@@ -80,6 +80,28 @@ class ChatsController extends Controller
 
 
 	  return ['status' => 'Message Sent!'];
+	}
+
+	public function sendMessageBot(Request $request)
+	{
+	  	$user = User::find($request->sender);
+		$userReceiver=User::find($request->receiver);
+		$messageIn = new Inbox();
+		$messageIn->sender = $request->sender;
+		$messageIn->receiver = $request->receiver;
+		$messageIn->id_chatroom = $request->id_chatroom;
+		$messageIn->messages = $request->message;
+		$messageIn->save();
+
+		$messageOut = new Outbox();
+		$messageOut->sender = $request->sender;
+		$messageOut->receiver = $request->receiver;
+		$messageOut->id_chatroom = $request->id_chatroom;
+		$messageOut->messages = $request->message;
+		$messageOut->save();
+
+	  broadcast(new MessageSent($user,$userReceiver,$messageIn))->toOthers();
+	  return ['status' => '1'];
 	}
 
 	public function userMessages($friend){

@@ -27,11 +27,11 @@ CREATE TABLE `chatroom` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `chatroom` */
 
-insert  into `chatroom`(`id`,`user1`,`user2`,`created_at`,`updated_at`) values (1,4,1,'2018-05-08 15:01:23','2018-05-08 15:01:23'),(2,4,2,'2018-05-08 15:03:21','2018-05-08 15:03:21'),(3,4,3,'2018-05-08 15:03:24','2018-05-08 15:03:24'),(4,1,3,'2018-05-08 16:34:52','2018-05-08 16:34:52'),(5,1,2,'2018-05-08 16:34:54','2018-05-08 16:34:54');
+insert  into `chatroom`(`id`,`user1`,`user2`,`created_at`,`updated_at`) values (1,4,1,'2018-05-08 15:01:23','2018-05-08 15:01:23'),(2,4,2,'2018-05-08 15:03:21','2018-05-08 15:03:21'),(3,4,3,'2018-05-08 15:03:24','2018-05-08 15:03:24'),(4,1,3,'2018-05-08 16:34:52','2018-05-08 16:34:52'),(5,1,2,'2018-05-08 16:34:54','2018-05-08 16:34:54'),(6,1,5,'2018-05-22 16:18:58','2018-05-22 16:18:58'),(7,6,8,'2018-05-22 17:49:23','2018-05-22 17:49:23');
 
 /*Table structure for table `det_chatroom` */
 
@@ -64,12 +64,13 @@ CREATE TABLE `inbox` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `flag` enum('inbox') DEFAULT 'inbox',
+  `status` enum('just_arrived','done') DEFAULT 'just_arrived',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 /*Data for the table `inbox` */
 
-insert  into `inbox`(`id`,`sender`,`receiver`,`id_chatroom`,`messages`,`created_at`,`updated_at`,`flag`) values (37,4,1,1,'hey','2018-05-08 18:32:58','2018-05-08 18:32:58','inbox'),(38,4,1,1,'wkwkwk','2018-05-08 18:34:37','2018-05-08 18:34:37','inbox'),(40,4,1,1,'oi','2018-05-08 18:42:45','2018-05-08 18:42:45','inbox'),(42,4,1,1,'kampret','2018-05-08 18:47:14','2018-05-08 18:47:14','inbox'),(44,4,1,1,'wkkw','2018-05-08 18:48:42','2018-05-08 18:48:42','inbox');
+insert  into `inbox`(`id`,`sender`,`receiver`,`id_chatroom`,`messages`,`created_at`,`updated_at`,`flag`,`status`) values (33,6,8,7,'hey','2018-05-23 02:20:21','2018-05-22 18:20:20','inbox','done'),(34,8,6,7,'Hey Juga Bro','2018-05-23 02:20:21','2018-05-22 18:20:21','inbox','done'),(35,6,8,7,'kamu siapa ?','2018-05-23 02:21:37','2018-05-22 18:21:29','inbox','done'),(36,8,6,7,'Aku Nana Bot, Salam Kenal','2018-05-23 02:21:37','2018-05-22 18:21:32','inbox','done');
 
 /*Table structure for table `migrations` */
 
@@ -99,12 +100,13 @@ CREATE TABLE `outbox` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `flag` enum('outbox') DEFAULT 'outbox',
+  `status` enum('just_arrived','done') DEFAULT 'just_arrived',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 /*Data for the table `outbox` */
 
-insert  into `outbox`(`id`,`sender`,`receiver`,`id_chatroom`,`messages`,`created_at`,`updated_at`,`flag`) values (23,4,1,1,'hey','2018-05-08 18:32:58','2018-05-08 18:32:58','outbox'),(24,4,1,1,'wkwkwk','2018-05-08 18:34:37','2018-05-08 18:34:37','outbox'),(25,1,4,1,'oi','2018-05-08 18:41:35','2018-05-08 18:41:35','outbox'),(26,4,1,1,'oi','2018-05-08 18:42:45','2018-05-08 18:42:45','outbox'),(27,1,4,1,'oi','2018-05-08 18:43:00','2018-05-08 18:43:00','outbox'),(28,4,1,1,'kampret','2018-05-08 18:47:14','2018-05-08 18:47:14','outbox'),(29,1,4,1,'kampret','2018-05-08 18:47:26','2018-05-08 18:47:26','outbox'),(30,4,1,1,'wkkw','2018-05-08 18:48:42','2018-05-08 18:48:42','outbox'),(31,1,4,1,'hey yo','2018-05-08 18:48:52','2018-05-08 18:48:52','outbox'),(32,1,4,1,'hey yoo fuck','2018-05-08 18:49:00','2018-05-08 18:49:00','outbox');
+insert  into `outbox`(`id`,`sender`,`receiver`,`id_chatroom`,`messages`,`created_at`,`updated_at`,`flag`,`status`) values (33,6,8,7,'hey','2018-05-23 02:20:21','2018-05-22 18:20:20','outbox','done'),(34,8,6,7,'Hey Juga Bro','2018-05-23 02:20:21','2018-05-22 18:20:21','outbox','done'),(35,6,8,7,'kamu siapa ?','2018-05-23 02:21:37','2018-05-22 18:21:29','outbox','done'),(36,8,6,7,'Aku Nana Bot, Salam Kenal','2018-05-23 02:21:37','2018-05-22 18:21:32','outbox','done');
 
 /*Table structure for table `password_resets` */
 
@@ -131,13 +133,14 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `type` enum('human','bot') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`) values (1,'Nana','kumalanana@gmail.com','$2y$10$5rk4AwMJEYjvKRToY6MRjOb4Q4PWuFEtS606YaQ2Eu/xh/wzzdY42',NULL,'2018-04-29 14:56:39','2018-04-29 14:56:39'),(2,'kumala','kasaku0408@gmail.com','$2y$10$wNx3ai1xtjbiUjtCYKfNY.KCRYAWEGxg6t.4GwTwEoYDGWK7JyqkW',NULL,'2018-05-03 15:10:53','2018-05-03 15:10:53'),(3,'Urip Yogantara','uripyogantara@gmail.com','$2y$10$kOW2knsSmrzNr45JKPxEaep/HLxherAy0/G7sWk8p87Gh6J0LVWI.','9N6b6yAr8LDGQEYVR1SHepaSpE3GQaVl0O0oJhCwWUTozJYJGOqurlGFgpid','2018-05-06 16:33:00','2018-05-06 16:33:00'),(4,'I PUTU WAHYU','ikgdarmaputra@gmail.com','$2y$10$BH4uxedme90k.FnSiZAShOetB2U2aEIBBa8h1G26NYdBWW7YIeWwO',NULL,'2018-05-08 14:31:51','2018-05-08 14:31:51');
+insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`created_at`,`updated_at`,`type`) values (6,'I PUTU WAHYU','wahyu.permadi1725@gmail.com','$2y$10$XlwZ9LHBgCCZkEREJfpHZuzblKqUH2M/liKlwTOFdelVss6sX0Pc.',NULL,'2018-05-22 17:45:37','2018-05-22 17:45:37',NULL),(7,'NANA KUMALI','nana@gmail.com','$2y$10$XlwZ9LHBgCCZkEREJfpHZuzblKqUH2M/liKlwTOFdelVss6sX0Pc.',NULL,NULL,NULL,NULL),(8,'nanaBOT','','',NULL,NULL,NULL,'bot');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

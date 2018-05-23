@@ -4,30 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-// use Auth;
-class UserController extends Controller
+class BotController extends Controller
 {
-    public function __construct(){
-	  $this->middleware('auth')->except('index');
-	}
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'index']);
+    }
     public function index()
     {
-        $users = User::where('id','!=',Auth::user()->id)->get();
-        return $users;
+        return User::all();
     }
 
-    public function current_user()
-    {
-        $user = User::find(Auth::user()->id);
-        return $user;
-    }
-
+    public function sendMessageBot(Request $request)
+	{
+		return 'wkwkwk';
+	}
     /**
      * Show the form for creating a new resource.
      *
